@@ -10,13 +10,14 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", Reqhandler)
+	http.HandleFunc("/", reqhandler)
+	http.HandleFunc("/healthz", healthz)
 	if err := http.ListenAndServe(":9091", nil); err != nil {
 		panic(err)
 	}
 }
 
-func Reqhandler(w http.ResponseWriter, r *http.Request) {
+func reqhandler(w http.ResponseWriter, r *http.Request) {
 	ipaddress := r.URL.Query().Get("ipaddress")
 	fmt.Println(ipaddress)
 	client, _ := ipisp.NewDNSClient()
@@ -27,4 +28,8 @@ func Reqhandler(w http.ResponseWriter, r *http.Request) {
 	resp, _ := json.Marshal(map[string]string{
 		"asn": asn, "prefix": prefix})
 	w.Write(resp)
+}
+
+func healthz(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "i am cool")
 }
