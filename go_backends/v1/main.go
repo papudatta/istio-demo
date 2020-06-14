@@ -11,12 +11,17 @@ import (
 
 func main() {
 	http.HandleFunc("/", reqhandler)
+	// "healthz" handler for kubernetes liveliness and readiness probes
 	http.HandleFunc("/healthz", healthz)
 	if err := http.ListenAndServe(":9091", nil); err != nil {
 		panic(err)
 	}
 }
 
+// technical debt: error handling
+// "reqhandler" uses whois service to fetch the details
+// in one of the struct types.
+// We parse the details and only return asn and prefix
 func reqhandler(w http.ResponseWriter, r *http.Request) {
 	ipaddress := r.URL.Query().Get("ipaddress")
 	fmt.Println(ipaddress)

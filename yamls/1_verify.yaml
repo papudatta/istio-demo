@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: flask
-        image: papudatta/istio-landing:2
+        image: papudatta/istio-pythonfe:7
         readinessProbe:
           httpGet:
             path: /healthz
@@ -45,6 +45,7 @@ spec:
   type: LoadBalancer
   ports:
   - port: 8081
+  externalTrafficPolicy: Local
   selector:
     type: flask
     service: pythonfe
@@ -72,7 +73,7 @@ spec:
     spec:
       containers:
       - name: goserv1
-        image: papudatta/istio-goserv1:1
+        image: papudatta/istio-goserv1:7
         readinessProbe:
           httpGet:
             path: /healthz
