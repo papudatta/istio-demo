@@ -14,10 +14,12 @@ def health():
 @app.route('/', methods=['GET'])
 def landing():
     try:
-        # ip_address = request.headers.get('X-Forwarded-For'). \
-        #                                 split(',')[0]
-        # Depends on the type of LB
-        ip_address = request.remote_addr
+        # Below choice depends on the type of LB
+        ip_address = request.headers.get('X-Forwarded-For'). \
+                                         split(',')[0]
+        # 
+        # ip_address = request.remote_addr
+        # ip_address = "122.171.152.151"
     except:
         # There will be an exception in goserv if this happens.
         ip_address = "There was a problem"

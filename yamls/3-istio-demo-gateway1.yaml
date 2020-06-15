@@ -1,0 +1,36 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: istio-demo-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: istio-demo-vservice
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - istio-demo-gateway
+  http:
+  - match:
+    - uri:
+        exact: /
+    - uri:
+        exact: /healthz
+    route:
+    - destination:
+        host: pythonfe
+        port:
+          number: 8081
+#k patch svc istio-ingressgateway -n istio-system -p '{"spec":{"externalTrafficPolicy":"Local"}}'
