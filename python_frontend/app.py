@@ -25,7 +25,7 @@ def landing():
         ip_address = "There was a problem"
 
     payload = {'ipaddress': ip_address}
-    r = requests.get("http://goserv1:9091", params=payload)
+    r = requests.get("http://goserv:9091", params=payload)
     resp = r.json()
     asn = resp["asn"]
     prefix = resp["prefix"]

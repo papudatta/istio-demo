@@ -5,6 +5,8 @@ metadata:
   labels:
     type: flask
     service: pythonfe
+    app: flask
+    version: pythonfe1
 spec:
   replicas: 3
   selector:
@@ -18,10 +20,12 @@ spec:
       labels:
         type: flask
         service: pythonfe
+        app: flask
+        version: pythonfe1
     spec:
       containers:
       - name: flask
-        image: papudatta/istio-pythonfe:10
+        image: papudatta/istio-pythonfe:latest
         readinessProbe:
           httpGet:
             path: /healthz
@@ -57,19 +61,19 @@ kind: Deployment
 metadata:
   name: goserv1
   labels:
-    type: golangv1
-    service: goserv1
+    app: goserv
+    version: goserv1
 spec:
   replicas: 2
   selector:
     matchLabels:
-      type: golangv1
-      service: goserv1
+      app: goserv
+      version: goserv1
   template:
     metadata:
       labels:
-        type: golangv1
-        service: goserv1
+        app: goserv
+        version: goserv1
     spec:
       containers:
       - name: goserv1
@@ -92,10 +96,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: goserv1
+  name: goserv
 spec:
   ports:
   - port: 9091
   selector:
-    type: golangv1
-    service: goserv1
+    app: goserv
