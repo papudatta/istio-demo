@@ -1,9 +1,6 @@
 ### istio-demo
 
-##### We can go directly to yamls and try those.
-##### On the other hand, if you want to push the container images to
-##### your own docker hub account, maybe after a change. you can use
-##### the usual docker build commands.
+##### We can go directly to yamls and try those. On the other hand, if you want to push the container images to your own docker hub account, maybe after a change, please use the usual docker build/push commands.
 ```
 docker login
 docker build -t docker_username/<image_name>:1 .
