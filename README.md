@@ -8,11 +8,11 @@ docker push docker_username/<image_name>:1
 ```
 ##### Update the yaml with the above image. Can do it manually or use sed
 
-**Overview of this demo app**
-FrontEnd runs a Python flask app
-Backend runs a golang service
-v1 of golang service returns ASN of the IP you are connecting from
-v2 returns Country code along with ASN
+**Overview of this demo app** \
+FrontEnd runs a Python flask app \
+Backend runs a golang service \
+v1 of golang service returns ASN of the IP you are connecting from \
+v2 returns Country code along with ASN.
 
 **Steps:**
 1. I'd run the yamls in the numbered fashion.
