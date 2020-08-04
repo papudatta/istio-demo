@@ -22,6 +22,12 @@ v2 returns Country code along with ASN.
 5. Notice a loadbalancer being configured after `3-istio-demo-gateway1.yaml` 
 6. Run `kubectl patch svc istio-ingressgateway -n istio-system -p '{"spec":{"externalTrafficPolicy":"Local"}}'`
    Else, we will not get expected results when making an http connection.
+   
+**Expose kiali and other tools:**
+1. `kubectl -n istio-system edit svc kiali` and change to `NodePort`
+2. `kubectl -n istio-system get svc kiali` and note the port number exposed
+3. Follow same steps for grafana, tracing and prometheus
+4. Point browser to `nodeIP:NodePort`
 
 **Useful commands to inspect above implementations.**
 
